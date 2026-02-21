@@ -10,3 +10,6 @@
 - Tomcat is the embedded HTTP server, runs on port 8080 by default
 - application.properties is used to configure the app (datasource, port, etc.)
 - Fixed IntelliJ Wayland bug with -Dawt.toolkit.name=WLToolkit in VM options
+- ApiInfo class created (doesn't need spring boot annotation, POJO)
+- HealthController returns an ApiInfo object, which Jackson serializes to JSON
+- spring boot uses Jackson to convert Java to JSON but it needs getters to work
