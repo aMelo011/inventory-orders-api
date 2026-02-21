@@ -12,4 +12,9 @@ public class HealthController {
     public String health(){
         return "OK";
     }
+
+    @GetMapping("/info")
+    public ApiInfo apiInfo(){
+        return new ApiInfo("running", "1.0.0");
+    }
 }
