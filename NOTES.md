@@ -19,3 +19,7 @@
 - @PostMapping maps a method to get a POST http request on a specific path
 - @RequestBody makes Spring read the HTTP body convert JSON to the object
 - Content-Type: application/json tells the server the request body is JSON so Spring knows how to deserialize it.
+- Constructor Injection is better than using @Autowire in modern spring
+- Constructor Injection can make data immutable and also hides class dependencies (is better)
+- Service layer contains business logic, keeping controllers focused on HTTP only (separation of concerns)
+- private final "Object" - Guarantees that the object won't be changed in runtime 
