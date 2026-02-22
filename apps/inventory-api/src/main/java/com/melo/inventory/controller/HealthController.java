@@ -1,5 +1,6 @@
 package com.melo.inventory.controller;
 
+import com.melo.inventory.model.ApiInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

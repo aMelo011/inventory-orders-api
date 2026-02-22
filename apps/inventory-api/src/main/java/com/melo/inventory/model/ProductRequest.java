@@ -1,4 +1,4 @@
-package com.melo.inventory.controller;
+package com.melo.inventory.model;
 
 public class ProductRequest {
     private String name;

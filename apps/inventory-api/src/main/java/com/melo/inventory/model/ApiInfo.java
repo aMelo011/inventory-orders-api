@@ -1,4 +1,4 @@
-package com.melo.inventory.controller;
+package com.melo.inventory.model;
 
 public class ApiInfo {
     private String status;
