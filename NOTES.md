@@ -13,3 +13,9 @@
 - ApiInfo class created (doesn't need spring boot annotation, POJO)
 - HealthController returns an ApiInfo object, which Jackson serializes to JSON
 - spring boot uses Jackson to convert Java to JSON but it needs getters to work
+
+## 2026-02-22
+
+- @PostMapping maps a method to get a POST http request on a specific path
+- @RequestBody makes Spring read the HTTP body convert JSON to the object
+- Content-Type: application/json tells the server the request body is JSON so Spring knows how to deserialize it.
