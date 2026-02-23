@@ -29,3 +29,8 @@
 - Validation lives in the exact moment where data comes from outside
 - Services have to assume that the data they have is valid
 - @NotBlank and @Positive are validators for not being blank and for being positive
+- Exception handling is necessary to find the root cause of problems without it the problem becomes wider
+- forEach in java works like a for loop that runs for every field in a list or array
+- Every error or exception should have its own method inside of the GlobalExceptionHandler
+- Map in java is a data structure that works in pairs (String, String) meaning the "name" is a string and its value is also a string
+- @RestControllerAdvice marks a class as a global exception handler for all controllers
