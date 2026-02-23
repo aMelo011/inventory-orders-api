@@ -23,3 +23,9 @@
 - Constructor Injection can make data immutable and also hides class dependencies (is better)
 - Service layer contains business logic, keeping controllers focused on HTTP only (separation of concerns)
 - private final "Object" - Guarantees that the object won't be changed in runtime 
+
+## 2026-02-23
+
+- Validation lives in the exact moment where data comes from outside
+- Services have to assume that the data they have is valid
+- @NotBlank and @Positive are validators for not being blank and for being positive
