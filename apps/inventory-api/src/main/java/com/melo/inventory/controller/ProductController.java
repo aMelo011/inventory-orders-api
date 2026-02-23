@@ -2,6 +2,7 @@ package com.melo.inventory.controller;
 
 import com.melo.inventory.model.ProductRequest;
 import com.melo.inventory.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public ProductRequest productRequest(@RequestBody ProductRequest productRequest){
+    public ProductRequest productRequest(@Valid @RequestBody ProductRequest productRequest){
 
         return productService.createProduct(productRequest);
     }

@@ -1,7 +1,14 @@
 package com.melo.inventory.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
+
 public class ProductRequest {
+    @NotBlank
     private String name;
+
+    @Positive
     private double price;
 
     public ProductRequest(String name, double price){
