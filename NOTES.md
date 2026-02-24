@@ -34,3 +34,8 @@
 - Every error or exception should have its own method inside of the GlobalExceptionHandler
 - Map in java is a data structure that works in pairs (String, String) meaning the "name" is a string and its value is also a string
 - @RestControllerAdvice marks a class as a global exception handler for all controllers
+
+## 2026-02-04
+- 2xx HTTP codes: - Sucess: 200(OK); 201(Created); 204(No Content)
+- 4xx HTTP codes: - Client error: 400(Bad Request); 401(Unauthorized); 403(Forbidden); 404(Not Found)
+- 5xx HTTP codes: - Server error: 500(Internal Server Error)
