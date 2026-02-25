@@ -40,3 +40,12 @@
 - 4xx HTTP codes: - Client error: 400(Bad Request); 401(Unauthorized); 403(Forbidden); 404(Not Found)
 - 5xx HTTP codes: - Server error: 500(Internal Server Error)
 - ResponseEntity permits the control of a http status code in an object
+
+##2026-02-25
+- A java interface is like a class but it only defines the contracts (methods) without implementing them
+- When an interface extends to JpaRepository it comes with some methods (save(), findById(), findAll(), deleteById(), etc)
+- A JPA (@Entity) is a Java class that represents a table in a database, each insance of the class is a line on a table
+- Hibernate creates the tables and does the queries automatically
+- JPA needs an empty constructor to recontruct Java objects, first creating an empty instance and then using the setters to set their values
+- The Product class has an auto generated id in the db, not a specific id given by the user like in the case of using ProductRequest
+- productRepository.save() gives a product stored in the db with a generated id
