@@ -1,5 +1,6 @@
 package com.melo.inventory.controller;
 
+import com.melo.inventory.model.Product;
 import com.melo.inventory.model.ProductRequest;
 import com.melo.inventory.service.ProductService;
 import jakarta.validation.Valid;
@@ -21,7 +22,7 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public ResponseEntity <ProductRequest> productRequest(@Valid @RequestBody ProductRequest productRequest){
+    public ResponseEntity<Product> productRequest(@Valid @RequestBody ProductRequest productRequest){
 
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(productRequest));
     }
