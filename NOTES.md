@@ -49,3 +49,9 @@
 - JPA needs an empty constructor to recontruct Java objects, first creating an empty instance and then using the setters to set their values
 - The Product class has an auto generated id in the db, not a specific id given by the user like in the case of using ProductRequest
 - productRepository.save() gives a product stored in the db with a generated id
+- .orElseThrow gives an exception when the Optional is empty, meaning the value doesn't exist
+- The endpoints on ProductController are simplified becouse ProductRepository has context on Products
+- Optional is a container that may have or not a value, in the case of a product not existing in the db
+- @PathVariable makes Spring understand that the id comes from the URL
+- ResponseStatusException controls the status code of a service 
+- ResponseEntity.ok() represents a shortcut for status 200(ok)
