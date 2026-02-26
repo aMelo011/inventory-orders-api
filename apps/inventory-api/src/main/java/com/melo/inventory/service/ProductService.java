@@ -31,4 +31,16 @@ public class ProductService {
         return productRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
     }
+
+    public Product putProduct(Long id, ProductRequest productRequest){
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+
+        product.setName(productRequest.getName());
+        product.setPrice(productRequest.getPrice());
+
+        return productRepository.save(product);
+    }
+
+
 }
