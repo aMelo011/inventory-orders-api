@@ -41,7 +41,7 @@
 - 5xx HTTP codes: - Server error: 500(Internal Server Error)
 - ResponseEntity permits the control of a http status code in an object
 
-##2026-02-25
+## 2026-02-25
 - A java interface is like a class but it only defines the contracts (methods) without implementing them
 - When an interface extends to JpaRepository it comes with some methods (save(), findById(), findAll(), deleteById(), etc)
 - A JPA (@Entity) is a Java class that represents a table in a database, each insance of the class is a line on a table
@@ -55,3 +55,10 @@
 - @PathVariable makes Spring understand that the id comes from the URL
 - ResponseStatusException controls the status code of a service 
 - ResponseEntity.ok() represents a shortcut for status 200(ok)
+
+## 2026-02-26
+- When you extend a repository to JpaRepository, it creates a class with useful methods for that repo
+- When you start a Spring Application it reads all packages inside com.melo.inventory and then the classes, after that it scan all files in search of some annotations and store them in "Application Context"
+- DTO = Data Transfer Object (ProductRequest)
+- A request flow goes like this controller->service->repository
+- PUT (HTTP) is like an UPDATE, (findById + save)
