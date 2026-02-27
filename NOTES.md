@@ -64,4 +64,7 @@
 - PUT (HTTP) is like an UPDATE, (findById + save)
 
 ## 2026-02-27
-- 
+- @DeleteMapping is the annotation to create an API to delete products
+- JpaRepository does db operations (save,find,delete)
+- Since deleteProduct was a void, in the controller the method had to return a Void ResponseEntity. Only becouse the class wasn't returning a body
+- Status 204 (No Content) is used when the response has no body, common in DELETE operations.
