@@ -62,3 +62,6 @@
 - DTO = Data Transfer Object (ProductRequest)
 - A request flow goes like this controller->service->repository
 - PUT (HTTP) is like an UPDATE, (findById + save)
+
+## 2026-02-27
+- 
