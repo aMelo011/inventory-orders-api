@@ -68,3 +68,14 @@
 - JpaRepository does db operations (save,find,delete)
 - Since deleteProduct was a void, in the controller the method had to return a Void ResponseEntity. Only becouse the class wasn't returning a body
 - Status 204 (No Content) is used when the response has no body, common in DELETE operations.
+
+## 2026-02-28
+- All dependencies are listed in pom.xml, to create one type <dependency> by <groupId> and <artifactId>
+- Hibernate has no control nor history, you can't revert
+- Flyway gives the programmer control with versioned SQL files
+- When using @GeneratedValue in Spring with Flyway, change the strategy to "GenerationType.IDENTITY" with this hibernate uses IDENTITY instead o sequence
+- ddl-auto=validate in application.properties only validates the the schema against entities without changing it, fundamental to use with Flyway
+- The files used in Flyway in Spring Boot apps are in /main/resources/db/migration
+- The convention for file names in Flyway are V1__description.sql (V + version + 2 underscores + description + .sql)
+- flyway_schema_history is a log to the database that Flyway generates
+- Rule: never change a migration file that has already been applied
