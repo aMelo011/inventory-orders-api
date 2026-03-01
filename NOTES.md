@@ -79,3 +79,16 @@
 - The convention for file names in Flyway are V1__description.sql (V + version + 2 underscores + description + .sql)
 - flyway_schema_history is a log to the database that Flyway generates
 - Rule: never change a migration file that has already been applied
+
+## 2026-03-01
+- Always use AAA pattern for tests (Arrange, Act, Assert)
+- Arrange: Prepare the data and tell the mock what to do
+- Act: Calls the method to be tested
+- Assert: Verify the result
+- @Mock: Mockito creates a false version of a repository
+- @InjectMocks: Mockito creates the service and injects the mock of the repository in the constructor
+- The name convention for tests should be literally the expected result
+- Mockito creates a mock for the ProductRepository interface so it doens't change any real data only mocks
+- assertThrows() -> Used when throwing an exception
+- assertEquals() -> Used when expecting a tangible result
+- when().thenReturn -> Used to tell Mock what to return
