@@ -92,3 +92,5 @@
 - assertThrows() -> Used when throwing an exception
 - assertEquals() -> Used when expecting a tangible result
 - when().thenReturn -> Used to tell Mock what to return
+
+## 2026-03-02
