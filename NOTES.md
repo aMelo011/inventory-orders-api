@@ -94,3 +94,6 @@
 - when().thenReturn -> Used to tell Mock what to return
 
 ## 2026-03-02
+- GlobalExceptionHandler should always return correct http codes
+- @ResponseSatus(HttpStatus.THE_STATUS) - controls the status code in a method
+- Client errors in http have 4xx code
