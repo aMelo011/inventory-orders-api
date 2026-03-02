@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,14 +33,14 @@ public class ProductServiceTest {
         Product product = new Product();
         product.setId(1L);
         product.setName("test01");
-        product.setPrice(33.33);
+        product.setPrice(BigDecimal.valueOf(33.33));
 
-        ProductRequest productRequest = new ProductRequest("test01", 33.33);
+        ProductRequest productRequest = new ProductRequest("test01", BigDecimal.valueOf(33.33));
 
         when(productRepository.save(any(Product.class))).thenReturn(product);
 
         Product result = productService.createProduct(productRequest);
-        assertEquals(33.33, result.getPrice());
+        assertEquals(BigDecimal.valueOf(33.33), result.getPrice());
     }
 
     @Test
@@ -48,10 +49,10 @@ public class ProductServiceTest {
         Product product2 = new Product();
 
         product1.setName("Monitor");
-        product1.setPrice(249.99);
+        product1.setPrice(BigDecimal.valueOf((249.99)));
 
         product2.setName("Keyboard");
-        product2.setPrice(39.99);
+        product2.setPrice(BigDecimal.valueOf((39.99)));
 
         when(productRepository.findAll()).thenReturn(List.of(product1, product2));
 

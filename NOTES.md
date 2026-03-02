@@ -97,3 +97,4 @@
 - GlobalExceptionHandler should always return correct http codes
 - @ResponseSatus(HttpStatus.THE_STATUS) - controls the status code in a method
 - Client errors in http have 4xx code
+
