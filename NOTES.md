@@ -97,4 +97,8 @@
 - GlobalExceptionHandler should always return correct http codes
 - @ResponseSatus(HttpStatus.THE_STATUS) - controls the status code in a method
 - Client errors in http have 4xx code
-
+- BigDecimal is better than double when dealing with precise data
+- BigDecimal always stores exactly the number
+- double is imprecise because of the floating point representation
+- ALTER TABLE .. ALTER COLUMN .. TYPE .. - to change type on db
+- BigDecimal.valueOf() - Creates a BigDecimal in Java
