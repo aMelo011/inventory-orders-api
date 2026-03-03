@@ -13,6 +13,8 @@ public class ProductRequest {
     @Positive
     private BigDecimal price;
 
+    private Long categoryId;
+
     public ProductRequest(String name, BigDecimal price){
         this.name = name;
         this.price = price;
@@ -20,7 +22,9 @@ public class ProductRequest {
 
     public String getName(){return name;}
     public BigDecimal getPrice(){return price;}
+    public Long getCategoryId(){return categoryId;}
 
     public void setName(String name){this.name = name;}
     public void setPrice(BigDecimal price){this.price = price;}
+    public void setCategoryId(Long categoryId){this.categoryId = categoryId;}
 }

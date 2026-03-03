@@ -1,0 +1,16 @@
+package com.melo.inventory.model;
+
+import jakarta.validation.constraints.NotBlank;
+
+public class CategoryRequest {
+    @NotBlank
+    private String name;
+
+    public CategoryRequest(String name){
+        this.name = name;
+    }
+
+    public String getName(){return name;}
+
+    public void setName(String name){this.name = name;}
+}

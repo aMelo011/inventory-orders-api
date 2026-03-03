@@ -2,6 +2,7 @@ package com.melo.inventory.service;
 
 import com.melo.inventory.model.Product;
 import com.melo.inventory.model.ProductRequest;
+import com.melo.inventory.repository.CategoryRepository;
 import com.melo.inventory.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,7 +14,12 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
-    public ProductService(ProductRepository productRepository){this.productRepository = productRepository;}
+    private final CategoryRepository categoryRepository;
+
+    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository){
+        this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+    }
 
     public Product createProduct(ProductRequest productRequest){
         Product product = new Product();
