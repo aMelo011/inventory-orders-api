@@ -102,3 +102,13 @@
 - double is imprecise because of the floating point representation
 - ALTER TABLE .. ALTER COLUMN .. TYPE .. - to change type on db
 - BigDecimal.valueOf() - Creates a BigDecimal in Java
+
+## 2026-03-03
+- With Flyway, always create migrations before Java entities (database first)
+- @ManyToOne defines a relationship where many entities belong to one (many products -> one category)
+- @JoinColumn(name = "column_name") tells Hibernate which column in the table holds the foreign key
+- In JPA, relationships use objects (Category category) not IDs (Long categoryId)
+- DTOs use IDs (Long categoryId) because the client sends an ID, not the full object
+- A service can inject multiple repositories in the same constructor
+- ALTER TABLE .. ADD COLUMN .. REFERENCES .. creates a foreign key in SQL
+- camelCase is the Java naming convention for fields and methods
