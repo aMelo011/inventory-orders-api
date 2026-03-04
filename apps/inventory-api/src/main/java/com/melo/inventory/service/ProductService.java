@@ -1,5 +1,7 @@
 package com.melo.inventory.service;
 
+import com.melo.inventory.model.Category;
+import com.melo.inventory.model.CategoryRequest;
 import com.melo.inventory.model.Product;
 import com.melo.inventory.model.ProductRequest;
 import com.melo.inventory.repository.CategoryRepository;
@@ -21,12 +23,18 @@ public class ProductService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Product createProduct(ProductRequest productRequest){
+    public Product createProduct(ProductRequest productRequest) {
         Product product = new Product();
         product.setName(productRequest.getName());
         product.setPrice(productRequest.getPrice());
 
-        return  productRepository.save(product);
+        if (productRequest.getCategoryId() != null){
+            Category category = categoryRepository.findById(productRequest.getCategoryId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
+            product.setCategory(category);
+        }
+
+        return productRepository.save(product);
     }
 
     public List<Product> getAllProducts(){
