@@ -112,3 +112,8 @@
 - A service can inject multiple repositories in the same constructor
 - ALTER TABLE .. ADD COLUMN .. REFERENCES .. creates a foreign key in SQL
 - camelCase is the Java naming convention for fields and methods
+
+## 2026-03-04
+- findById().orElseThrow() -> Used to search for something and throws 404 when not found
+- Always check for nulls before searching for optional relations (if in categoryId)
+- A service can inject many repositories at once in the same constructor
