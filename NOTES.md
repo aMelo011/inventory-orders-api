@@ -117,3 +117,8 @@
 - findById().orElseThrow() -> Used to search for something and throws 404 when not found
 - Always check for nulls before searching for optional relations (if in categoryId)
 - A service can inject many repositories at once in the same constructor
+
+## 2026-03-05
+- Every repository tested should be mocked on the tests
+- Multiple assertEquals can be used in tests
+- Multiple Arranges (when(..).thenReturn(..)) can be used in tests
