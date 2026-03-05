@@ -1,7 +1,9 @@
 package com.melo.inventory.service;
 
+import com.melo.inventory.model.Category;
 import com.melo.inventory.model.Product;
 import com.melo.inventory.model.ProductRequest;
+import com.melo.inventory.repository.CategoryRepository;
 import com.melo.inventory.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,23 +26,35 @@ public class ProductServiceTest {
 
     @Mock
     private ProductRepository productRepository;
+    @Mock
+    private CategoryRepository categoryRepository;
 
     @InjectMocks
     private ProductService productService;
 
     @Test
     public void shouldCreateProductSuccessfully(){
+        Category category = new Category();
+        category.setId(1L);
+        category.setName("Electronics");
+
         Product product = new Product();
         product.setId(1L);
         product.setName("test01");
         product.setPrice(BigDecimal.valueOf(33.33));
+        product.setCategory(category);
+
+        when(categoryRepository.findById(1L)).thenReturn(Optional.of(category));
 
         ProductRequest productRequest = new ProductRequest("test01", BigDecimal.valueOf(33.33));
+        productRequest.setCategoryId(1L);
 
         when(productRepository.save(any(Product.class))).thenReturn(product);
 
+
         Product result = productService.createProduct(productRequest);
         assertEquals(BigDecimal.valueOf(33.33), result.getPrice());
+        assertEquals(1L, result.getCategory().getId());
     }
 
     @Test
