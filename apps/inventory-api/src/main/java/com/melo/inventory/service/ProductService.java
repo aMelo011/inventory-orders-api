@@ -6,6 +6,8 @@ import com.melo.inventory.model.Product;
 import com.melo.inventory.model.ProductRequest;
 import com.melo.inventory.repository.CategoryRepository;
 import com.melo.inventory.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
@@ -37,9 +39,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public List<Product> getAllProducts(){
-        return productRepository.findAll();
-    }
+    public Page<Product> getAllProducts(Pageable pageable){return productRepository.findAll(pageable);}
 
     public Product getById(Long id){
         return productRepository.findById(id)
