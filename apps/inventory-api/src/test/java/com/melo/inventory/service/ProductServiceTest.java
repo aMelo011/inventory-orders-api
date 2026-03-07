@@ -10,6 +10,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -60,6 +63,7 @@ public class ProductServiceTest {
 
     @Test
     public void shouldReturnAllProducts(){
+        Pageable pageable = PageRequest.of(0, 10);
         Product product1 = new Product();
         Product product2 = new Product();
 
@@ -69,10 +73,11 @@ public class ProductServiceTest {
         product2.setName("Keyboard");
         product2.setPrice(BigDecimal.valueOf((39.99)));
 
+        Page<Product> page = new PageImpl<>(List.of(product1, product2));
 
-        when(productRepository.findAll()).thenReturn(List.of(product1, product2));
+        when(productRepository.findAll(pageable)).thenReturn(page);
 
-        assertEquals(2, productService.getAllProducts().size());
+        assertEquals(2, productService.getAllProducts(pageable).getTotalElements());
     }
 
     @Test
