@@ -123,7 +123,11 @@
 - Multiple assertEquals can be used in tests
 - Multiple Arranges (when(..).thenReturn(..)) can be used in tests
 
-##2026-03-06
+## 2026-03-06
 - Attentio to AAA in tests
 - Pageable makes results in JSON to be pageable making it easier on the computer
 - You can pass the page sizes in URL: api/products?page=0&size=2
+
+## 2026-03-07
+- Pagination is better instead of List<Products>
+- PageImpl<> creates a false Page to use on tests with mock
