@@ -138,3 +138,10 @@
 ## 2026-03-09
 - JWT is only a the format of the token
 - The user table is reserved in PostgreSQL, that's why its app_user
+
+## 2026-03-10
+- JwtService has two methods: generateToken creates a token, extractEmail reads the email from a token
+- BCryptPasswordEncoder.encode() -> Encrpyts passwords before saving to the database
+- BCryptPasswordEncoder.matches() compares a plain password with an encrypted one
+- AuthService handles register (create user + encrypt password) and login (verify credentials + return token)
+- Exceptions are thrown with throw, not returned with return
