@@ -145,3 +145,8 @@
 - BCryptPasswordEncoder.matches() compares a plain password with an encrypted one
 - AuthService handles register (create user + encrypt password) and login (verify credentials + return token)
 - Exceptions are thrown with throw, not returned with return
+
+## 2026-03-11
+- Stateless: The server doesn't store the sessions
+- Register encrpyts the passwords before storing them
+- Login verifies the credentials and gives a token back
