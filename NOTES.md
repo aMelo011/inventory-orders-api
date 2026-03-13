@@ -150,3 +150,11 @@
 - Stateless: The server doesn't store the sessions
 - Register encrpyts the passwords before storing them
 - Login verifies the credentials and gives a token back
+
+## 2026-03-12
+- Added content on TODO (docs)
+
+## 2026-03-13
+- Never expose passwords (even if encrypted) in HTTP reponses
+- Create a response DTO separate from the entity to control the expected result
+- save() has to run before creating the DTO, the id only exists if the object is stored in the DB
