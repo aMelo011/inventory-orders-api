@@ -1,6 +1,7 @@
 package com.melo.inventory.security;
 
 import com.melo.inventory.model.AppUser;
+import com.melo.inventory.model.AppUserResponse;
 import com.melo.inventory.repository.AppUserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,13 +20,15 @@ public class AuthService {
         this.jwtService = jwtService;
     }
 
-    public AppUser register(String email, String password){
+    public AppUserResponse register(String email, String password){
         AppUser appUser = new AppUser();
 
         appUser.setEmail(email);
         appUser.setPassword(passwordEncoder.encode(password));
 
-        return appUserRepository.save(appUser);
+        AppUser savedUser = appUserRepository.save(appUser);
+
+        return new AppUserResponse(savedUser.getId(), savedUser.getEmail());
     }
 
     public String login (String email, String password){

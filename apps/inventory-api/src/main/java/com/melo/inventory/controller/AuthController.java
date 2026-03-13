@@ -1,6 +1,7 @@
 package com.melo.inventory.controller;
 
 import com.melo.inventory.model.AppUser;
+import com.melo.inventory.model.AppUserResponse;
 import com.melo.inventory.model.AuthRequest;
 import com.melo.inventory.security.AuthService;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class AuthController {
     public AuthController(AuthService authService){this.authService = authService;}
 
     @PostMapping("auth/register")
-    public ResponseEntity<AppUser> registerAppUser(@RequestBody AuthRequest authRequest){
+    public ResponseEntity<AppUserResponse> registerAppUser(@RequestBody AuthRequest authRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(authRequest.getEmail(), authRequest.getPassword()));
     }
 
