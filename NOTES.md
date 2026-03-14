@@ -158,3 +158,9 @@
 - Never expose passwords (even if encrypted) in HTTP reponses
 - Create a response DTO separate from the entity to control the expected result
 - save() has to run before creating the DTO, the id only exists if the object is stored in the DB
+
+## 2026-04-14
+- CI is used to run tests automatically with GitHub
+- ci.yml file lives in .github/workflows/
+- CI need java 21 and maven (same as the project)
+- CI doesn't block any push it only shows a checker or a cross and I decide
