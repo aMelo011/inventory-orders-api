@@ -172,3 +172,10 @@
 - OrderItem connects Order to Products with two @ManyToOne
 - The intermidiary table stores the extra of the relation (quantity)
 - LocalDateTime for datas in Java TIMESTAMP in PostgreSQL
+
+## 2026-03-15
+- Many to Many relationships need an intermidiary table ->  Orders (Order_item) Products
+- Order is a reserved word in SQL so use orders
+- OrderItem connects Order to Products with two @ManyToOne
+- The intermidiary table stores the extra of the relation (quantity)
+- LocalDateTime for datas in Java TIMESTAMP in PostgreSQL
