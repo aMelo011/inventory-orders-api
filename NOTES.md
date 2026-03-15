@@ -159,8 +159,16 @@
 - Create a response DTO separate from the entity to control the expected result
 - save() has to run before creating the DTO, the id only exists if the object is stored in the DB
 
-## 2026-04-14
+## 2026-03-14
 - CI is used to run tests automatically with GitHub
 - ci.yml file lives in .github/workflows/
 - CI need java 21 and maven (same as the project)
 - CI doesn't block any push it only shows a checker or a cross and I decide
+
+
+## 2026-03-15
+- Many to Many relationships need an intermidiary table ->  Orders (Order_item) Products
+- Order is a reserved word in SQL so use orders
+- OrderItem connects Order to Products with two @ManyToOne
+- The intermidiary table stores the extra of the relation (quantity)
+- LocalDateTime for datas in Java TIMESTAMP in PostgreSQL
