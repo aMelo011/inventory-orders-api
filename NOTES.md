@@ -179,3 +179,9 @@
 - OrderItem connects Order to Products with two @ManyToOne
 - The intermidiary table stores the extra of the relation (quantity)
 - LocalDateTime for datas in Java TIMESTAMP in PostgreSQL
+
+## 2026-03-16
+- for(Type item : list) runs each element of a list
+- A order is created, stored adn then the items are created and associated to the order
+- The intermediary table (order_item) is set with OrderItem with setOrder and setProduct
+- The user email comes from the JWT to identify who is asking for the order
