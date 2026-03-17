@@ -41,13 +41,13 @@
 ## 2026-02-25
 - A java interface is like a class but it only defines the contracts (methods) without implementing them
 - When an interface extends to JpaRepository it comes with some methods (save(), findById(), findAll(), deleteById(), etc)
-- A JPA (@Entity) is a Java class that represents a table in a database, each insance of the class is a line on a table
+- A JPA (@Entity) is a Java class that represents a table in a database, each instance of the class is a line on a table
 - Hibernate creates the tables and does the queries automatically
 - JPA needs an empty constructor to recontruct Java objects, first creating an empty instance and then using the setters to set their values
 - The Product class has an auto generated id in the db, not a specific id given by the user like in the case of using ProductRequest
 - productRepository.save() gives a product stored in the db with a generated id
 - .orElseThrow gives an exception when the Optional is empty, meaning the value doesn't exist
-- The endpoints on ProductController are simplified becouse ProductRepository has context on Products
+- The endpoints on ProductController are simplified because ProductRepository has context on Products
 - Optional is a container that may have or not a value, in the case of a product not existing in the db
 - @PathVariable makes Spring understand that the id comes from the URL
 - ResponseStatusException controls the status code of a service 
@@ -63,7 +63,7 @@
 ## 2026-02-27
 - @DeleteMapping is the annotation to create an API to delete products
 - JpaRepository does db operations (save,find,delete)
-- Since deleteProduct was a void, in the controller the method had to return a Void ResponseEntity. Only becouse the class wasn't returning a body
+- Since deleteProduct was a void, in the controller the method had to return a Void ResponseEntity. Only because the class wasn't returning a body
 - Status 204 (No Content) is used when the response has no body, common in DELETE operations.
 
 ## 2026-02-28
@@ -141,21 +141,21 @@
 
 ## 2026-03-10
 - JwtService has two methods: generateToken creates a token, extractEmail reads the email from a token
-- BCryptPasswordEncoder.encode() -> Encrpyts passwords before saving to the database
+- BCryptPasswordEncoder.encode() -> Encrypts passwords before saving to the database
 - BCryptPasswordEncoder.matches() compares a plain password with an encrypted one
 - AuthService handles register (create user + encrypt password) and login (verify credentials + return token)
 - Exceptions are thrown with throw, not returned with return
 
 ## 2026-03-11
 - Stateless: The server doesn't store the sessions
-- Register encrpyts the passwords before storing them
+- Register encrypts the passwords before storing them
 - Login verifies the credentials and gives a token back
 
 ## 2026-03-12
 - Added content on TODO (docs)
 
 ## 2026-03-13
-- Never expose passwords (even if encrypted) in HTTP reponses
+- Never expose passwords (even if encrypted) in HTTP responses
 - Create a response DTO separate from the entity to control the expected result
 - save() has to run before creating the DTO, the id only exists if the object is stored in the DB
 
@@ -167,13 +167,11 @@
 
 
 ## 2026-03-15
-- Many to Many relationships need an intermidiary table ->  Orders (Order_item) Products
+- Many to Many relationships need an intermediary table ->  Orders (Order_item) Products
 - Order is a reserved word in SQL so use orders
 - OrderItem connects Order to Products with two @ManyToOne
 - The intermidiary table stores the extra of the relation (quantity)
-- LocalDateTime for datas in Java TIMESTAMP in PostgreSQL
-
-## 2026-03-15
+- LocalDateTime for dates in Java TIMESTAMP in PostgreSQL
 - Many to Many relationships need an intermidiary table ->  Orders (Order_item) Products
 - Order is a reserved word in SQL so use orders
 - OrderItem connects Order to Products with two @ManyToOne
@@ -182,6 +180,9 @@
 
 ## 2026-03-16
 - for(Type item : list) runs each element of a list
-- A order is created, stored adn then the items are created and associated to the order
+- A order is created, stored and then the items are created and associated to the order
 - The intermediary table (order_item) is set with OrderItem with setOrder and setProduct
 - The user email comes from the JWT to identify who is asking for the order
+
+## 2026-03-17
+- Fix Typos
