@@ -186,3 +186,8 @@
 
 ## 2026-03-17
 - Fix Typos
+
+## 2026-03-18
+- DTOs need an empty constructor so Jackson can desserialize JSON
+- Without @RequestBody Spring can't read the JSON request body
+- 
