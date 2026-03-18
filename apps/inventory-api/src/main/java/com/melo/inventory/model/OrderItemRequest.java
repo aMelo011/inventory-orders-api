@@ -10,6 +10,8 @@ public class OrderItemRequest {
     @Positive
     private int quantity;
 
+    public OrderItemRequest(){}
+
     public OrderItemRequest(Long productId, int quantity){
         this.productId = productId;
         this.quantity = quantity;
