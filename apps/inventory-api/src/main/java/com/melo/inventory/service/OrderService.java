@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -26,7 +28,7 @@ public class OrderService {
         this.appUserRepository = appUserRepository;
     }
 
-    public Order createOrder(String email, OrderRequest orderRequest){
+    public OrderResponse createOrder(String email, OrderRequest orderRequest){
         AppUser appUser = appUserRepository.findByEmail(email).
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Email not found"));
 
@@ -36,6 +38,8 @@ public class OrderService {
         order.setStatus("PENDING");
 
         orderRepository.save(order);
+
+        List<OrderItemResponse> itemResponses = new ArrayList<>();
 
         for (OrderItemRequest item : orderRequest.getItems()){
             Product product = productRepository.findById(item.getProductId())
@@ -49,8 +53,29 @@ public class OrderService {
 
 
             orderItemRepository.save(orderItem);
+
+            OrderItemResponse orderItemResponse = new OrderItemResponse();
+
+            orderItemResponse.setProductId(product.getId());
+            orderItemResponse.setQuantity(orderItem.getQuantity());
+            orderItemResponse.setProductName(orderItem.getProduct().getName());
+
+            itemResponses.add(orderItemResponse);
         }
 
-        return order;
+        AppUserResponse appUserResponse = new AppUserResponse();
+
+        appUserResponse.setEmail(appUser.getEmail());
+        appUserResponse.setId(appUser.getId());
+
+        OrderResponse orderResponse = new OrderResponse();
+
+        orderResponse.setId(order.getId());
+        orderResponse.setStatus(order.getStatus());
+        orderResponse.setCreatedAt(order.getCreatedAt());
+        orderResponse.setUser(appUserResponse);
+        orderResponse.setItems(itemResponses);
+
+        return orderResponse;
     }
 }

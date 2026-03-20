@@ -9,6 +9,8 @@ public class AppUserResponse {
         this.email = email;
     }
 
+    public AppUserResponse() {}
+
     public Long getId() {return id;}
     public String getEmail() {return email;}
 

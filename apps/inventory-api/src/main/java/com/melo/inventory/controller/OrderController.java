@@ -1,7 +1,7 @@
 package com.melo.inventory.controller;
 
-import com.melo.inventory.model.Order;
 import com.melo.inventory.model.OrderRequest;
+import com.melo.inventory.model.OrderResponse;
 import com.melo.inventory.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class OrderController {
     public OrderController(OrderService orderService){this.orderService = orderService;}
 
     @PostMapping("/orders")
-    public ResponseEntity<Order> createOrder(@RequestBody OrderRequest orderRequest, Authentication authentication){
+    public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest orderRequest, Authentication authentication){
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.createOrder(authentication.getName(), orderRequest));
     }
 }
