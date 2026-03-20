@@ -190,4 +190,10 @@
 ## 2026-03-18
 - DTOs need an empty constructor so Jackson can desserialize JSON
 - Without @RequestBody Spring can't read the JSON request body
-- 
+
+## 2026-03-19
+- Documentation
+
+## 2026-03-20
+- Business logic lives in Service not the Controller
+- Encrpyted password is not exposed on the response of POST/api/orders
