@@ -6,10 +6,9 @@ import com.melo.inventory.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -22,5 +21,10 @@ public class OrderController {
     @PostMapping("/orders")
     public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest orderRequest, Authentication authentication){
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.createOrder(authentication.getName(), orderRequest));
+    }
+
+    @GetMapping("/orders")
+    public ResponseEntity<List<OrderResponse>> getOrder(Authentication authentication){
+        return ResponseEntity.ok(orderService.getOrdersByUser(authentication.getName()));
     }
 }

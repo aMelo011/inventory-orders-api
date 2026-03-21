@@ -28,6 +28,7 @@ public class OrderService {
         this.appUserRepository = appUserRepository;
     }
 
+
     public OrderResponse createOrder(String email, OrderRequest orderRequest){
         AppUser appUser = appUserRepository.findByEmail(email).
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Email not found"));
@@ -36,7 +37,6 @@ public class OrderService {
         order.setCreatedAt(LocalDateTime.now());
         order.setUser(appUser);
         order.setStatus("PENDING");
-
         orderRepository.save(order);
 
         List<OrderItemResponse> itemResponses = new ArrayList<>();
@@ -46,16 +46,12 @@ public class OrderService {
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
 
             OrderItem orderItem = new OrderItem();
-
             orderItem.setProduct(product);
             orderItem.setOrder(order);
             orderItem.setQuantity(item.getQuantity());
-
-
             orderItemRepository.save(orderItem);
 
             OrderItemResponse orderItemResponse = new OrderItemResponse();
-
             orderItemResponse.setProductId(product.getId());
             orderItemResponse.setQuantity(orderItem.getQuantity());
             orderItemResponse.setProductName(orderItem.getProduct().getName());
@@ -64,12 +60,10 @@ public class OrderService {
         }
 
         AppUserResponse appUserResponse = new AppUserResponse();
-
         appUserResponse.setEmail(appUser.getEmail());
         appUserResponse.setId(appUser.getId());
 
         OrderResponse orderResponse = new OrderResponse();
-
         orderResponse.setId(order.getId());
         orderResponse.setStatus(order.getStatus());
         orderResponse.setCreatedAt(order.getCreatedAt());
@@ -77,5 +71,42 @@ public class OrderService {
         orderResponse.setItems(itemResponses);
 
         return orderResponse;
+    }
+
+    public List<OrderResponse> getOrdersByUser(String email){
+        AppUser appUser = appUserRepository.findByEmail(email).
+                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Email not found"));
+
+        List<Order> userOrders = orderRepository.findByUser(appUser);
+        List<OrderResponse> orderResponses = new ArrayList<>();
+        for (Order order : userOrders) {
+            List<OrderItemResponse> itemResponses = new ArrayList<>();
+            List<OrderItem> orderItems = orderItemRepository.findByOrder(order);
+
+            for (OrderItem orderItem : orderItems) {
+
+                OrderItemResponse orderItemResponse = new OrderItemResponse();
+                orderItemResponse.setProductId(orderItem.getProduct().getId());
+                orderItemResponse.setQuantity(orderItem.getQuantity());
+                orderItemResponse.setProductName(orderItem.getProduct().getName());
+
+                itemResponses.add(orderItemResponse);
+            }
+
+            AppUserResponse appUserResponse = new AppUserResponse();
+            appUserResponse.setId(appUser.getId());
+            appUserResponse.setEmail(appUser.getEmail());
+
+            OrderResponse orderResponse = new OrderResponse();
+            orderResponse.setId(order.getId());
+            orderResponse.setStatus(order.getStatus());
+            orderResponse.setCreatedAt(order.getCreatedAt());
+            orderResponse.setUser(appUserResponse);
+            orderResponse.setItems(itemResponses);
+
+            orderResponses.add(orderResponse);
+        }
+
+        return orderResponses;
     }
 }
