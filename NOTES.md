@@ -197,3 +197,7 @@
 ## 2026-03-20
 - Business logic lives in Service not the Controller
 - Encrpyted password is not exposed on the response of POST/api/orders
+
+## 2026-03-21
+- Conversion of entitiees inside of for cycles (each order has its own list of items)
+- Empty items on old orders, investigate to see if the problem is data or code
