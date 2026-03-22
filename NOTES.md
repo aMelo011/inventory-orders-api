@@ -201,3 +201,7 @@
 ## 2026-03-21
 - Conversion of entitiees inside of for cycles (each order has its own list of items)
 - Empty items on old orders, investigate to see if the problem is data or code
+
+## 2026-03-22
+- Name convention for Spring Data JPA: findBy + field name
+- anyString(), any() are Mockito Matchers and can only be used inside when()
