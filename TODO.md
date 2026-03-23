@@ -1,8 +1,13 @@
 ## TODO
 
-- [ ] Don't expose password in register response
+- [x] Don't expose password in register response
 - [ ] Integration tests with Testcontainers
-- [ ] GitHub Actions CI pipeline
-- [ ] Order entity with Product relationship
+- [x] GitHub Actions CI pipeline
+- [x] Order entity with Product relationship
 - [ ] Pagination for Categories
 - [ ] User roles (ADMIN, USER)
+
+- [ ] Expose password fix (OrderResponse DTO)
+- [ ] GitHub Actions CI
+- [ ] Order entity with relationships
+- [ ] GET/api/orders endpoints
