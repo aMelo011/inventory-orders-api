@@ -205,3 +205,11 @@
 ## 2026-03-22
 - Name convention for Spring Data JPA: findBy + field name
 - anyString(), any() are Mockito Matchers and can only be used inside when()
+
+## 2026-03-23
+- Notes on TODO
+
+## 2026-03-24
+- The first test always takes longer to start because of the Mockito inicialization
+- To test the happy path all the mocks have to return valid objects
+- AssertEquals() compares the value that the service sets not what the mock returns
