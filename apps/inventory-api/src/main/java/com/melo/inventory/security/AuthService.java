@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
+
 @Service
 public class AuthService {
 
@@ -25,6 +27,10 @@ public class AuthService {
 
         appUser.setEmail(email);
         appUser.setPassword(passwordEncoder.encode(password));
+
+        if(appUserRepository.findByEmail(email).isPresent()){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already exists");
+        }
 
         AppUser savedUser = appUserRepository.save(appUser);
 
