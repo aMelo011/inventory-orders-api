@@ -213,3 +213,7 @@
 - The first test always takes longer to start because of the Mockito inicialization
 - To test the happy path all the mocks have to return valid objects
 - AssertEquals() compares the value that the service sets not what the mock returns
+
+## 2026-03-25
+- HTTP error 409 for duplicates (Conflict)
+- When something seems wrong try using Curl instead of Postman
