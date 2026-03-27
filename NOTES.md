@@ -217,3 +217,9 @@
 ## 2026-03-25
 - HTTP error 409 for duplicates (Conflict)
 - When something seems wrong try using Curl instead of Postman
+
+## 2026-03-26
+- Changed JWT secret keys -> application.properties
+
+## 2020-03-27
+- Theory study session
