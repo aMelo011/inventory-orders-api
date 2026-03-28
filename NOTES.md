@@ -221,5 +221,8 @@
 ## 2026-03-26
 - Changed JWT secret keys -> application.properties
 
-## 2020-03-27
+## 2026-03-27
+- Theory study session
+
+## 2026-03-28
 - Theory study session

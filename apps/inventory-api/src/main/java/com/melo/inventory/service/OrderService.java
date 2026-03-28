@@ -5,6 +5,8 @@ import com.melo.inventory.repository.AppUserRepository;
 import com.melo.inventory.repository.OrderItemRepository;
 import com.melo.inventory.repository.OrderRepository;
 import com.melo.inventory.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -73,11 +75,11 @@ public class OrderService {
         return orderResponse;
     }
 
-    public List<OrderResponse> getOrdersByUser(String email){
+    public Page<Order> getOrdersByUser(Pageable pageable, String email){
         AppUser appUser = appUserRepository.findByEmail(email).
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Email not found"));
 
-        List<Order> userOrders = orderRepository.findByUser(appUser);
+        List<Order> userOrders = orderRepository.findByUser(pageable);
         List<OrderResponse> orderResponses = new ArrayList<>();
         for (Order order : userOrders) {
             List<OrderItemResponse> itemResponses = new ArrayList<>();

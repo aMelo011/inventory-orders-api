@@ -4,11 +4,12 @@ import com.melo.inventory.model.Category;
 import com.melo.inventory.model.CategoryRequest;
 import com.melo.inventory.service.CategoryService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -24,8 +25,7 @@ public class CategoryController {
     }
 
     @GetMapping("/categories")
-    public ResponseEntity<List<Category>> getAllCategories(){
-        return ResponseEntity.ok(categoryService.getAllCategories());
+    public ResponseEntity<Page<Category>> getAllCategories(Pageable pageable){
+        return ResponseEntity.ok(categoryService.getAllCategories(pageable));
     }
-
 }
