@@ -8,7 +8,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,9 +52,8 @@ public class CategoryServiceTest {
         category2.setId(2L);
         category2.setName("Monitors");
 
-        when(categoryRepository.findAll()).thenReturn(List.of(category1,category2));
-
-        assertEquals(2, categoryService.getAllCategories().size());
+        when(categoryRepository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(List.of(category1,category2)));
+        assertEquals(2, categoryService.getAllCategories(Pageable.unpaged()).getContent().size());
     }
 
 }
