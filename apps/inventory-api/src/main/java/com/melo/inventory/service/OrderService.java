@@ -8,6 +8,7 @@ import com.melo.inventory.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -75,40 +76,38 @@ public class OrderService {
         return orderResponse;
     }
 
-    public Page<Order> getOrdersByUser(Pageable pageable, String email){
+    public Page<OrderResponse> getOrdersByUser(String email, Pageable pageable){
         AppUser appUser = appUserRepository.findByEmail(email).
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Email not found"));
 
-        List<Order> userOrders = orderRepository.findByUser(pageable);
-        List<OrderResponse> orderResponses = new ArrayList<>();
-        for (Order order : userOrders) {
-            List<OrderItemResponse> itemResponses = new ArrayList<>();
-            List<OrderItem> orderItems = orderItemRepository.findByOrder(order);
+        Page<Order> orders = orderRepository.findByUser(appUser, pageable);
 
-            for (OrderItem orderItem : orderItems) {
 
-                OrderItemResponse orderItemResponse = new OrderItemResponse();
-                orderItemResponse.setProductId(orderItem.getProduct().getId());
-                orderItemResponse.setQuantity(orderItem.getQuantity());
-                orderItemResponse.setProductName(orderItem.getProduct().getName());
+        return orders.map(order -> {
+                List<OrderItemResponse> itemResponses = new ArrayList<>();
+                List<OrderItem> orderItems = orderItemRepository.findByOrder(order);
 
-                itemResponses.add(orderItemResponse);
-            }
+                for (OrderItem orderItem : orderItems) {
 
-            AppUserResponse appUserResponse = new AppUserResponse();
-            appUserResponse.setId(appUser.getId());
-            appUserResponse.setEmail(appUser.getEmail());
+                    OrderItemResponse orderItemResponse = new OrderItemResponse();
+                    orderItemResponse.setProductId(orderItem.getProduct().getId());
+                    orderItemResponse.setQuantity(orderItem.getQuantity());
+                    orderItemResponse.setProductName(orderItem.getProduct().getName());
 
-            OrderResponse orderResponse = new OrderResponse();
-            orderResponse.setId(order.getId());
-            orderResponse.setStatus(order.getStatus());
-            orderResponse.setCreatedAt(order.getCreatedAt());
-            orderResponse.setUser(appUserResponse);
-            orderResponse.setItems(itemResponses);
+                    itemResponses.add(orderItemResponse);
+                }
 
-            orderResponses.add(orderResponse);
-        }
+                AppUserResponse appUserResponse = new AppUserResponse();
+                appUserResponse.setId(appUser.getId());
+                appUserResponse.setEmail(appUser.getEmail());
 
-        return orderResponses;
+                OrderResponse orderResponse = new OrderResponse();
+                orderResponse.setId(order.getId());
+                orderResponse.setStatus(order.getStatus());
+                orderResponse.setCreatedAt(order.getCreatedAt());
+                orderResponse.setUser(appUserResponse);
+                orderResponse.setItems(itemResponses);
+            return orderResponse;
+        });
     }
 }

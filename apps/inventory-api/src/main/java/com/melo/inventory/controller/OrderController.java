@@ -2,7 +2,10 @@ package com.melo.inventory.controller;
 
 import com.melo.inventory.model.OrderRequest;
 import com.melo.inventory.model.OrderResponse;
+import com.melo.inventory.model.Product;
 import com.melo.inventory.service.OrderService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -24,7 +27,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
-    public ResponseEntity<List<OrderResponse>> getOrder(Authentication authentication){
-        return ResponseEntity.ok(orderService.getOrdersByUser(authentication.getName()));
+    public ResponseEntity<Page<OrderResponse>> getOrder(Authentication authentication, Pageable pageable){
+        return ResponseEntity.ok(orderService.getOrdersByUser(authentication.getName(), pageable));
     }
 }
