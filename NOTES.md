@@ -229,3 +229,8 @@
 
 ## 2026-03-29
 - Theory study session
+
+## 2026-03-30
+- Always try to use Pagination
+- Unitary tests for CategoryServiceTest
+- Testcontainers v1.21.4 necessary for compatibility with Docker 29
