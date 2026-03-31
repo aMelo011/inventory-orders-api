@@ -32,6 +32,8 @@ public class AuthService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already exists");
         }
 
+        appUser.setRole("USER");
+
         AppUser savedUser = appUserRepository.save(appUser);
 
         return new AppUserResponse(savedUser.getId(), savedUser.getEmail());
@@ -42,7 +44,7 @@ public class AuthService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Email not found"));
 
         if (passwordEncoder.matches(password, appUser.getPassword())){
-            return jwtService.generateToken(email);
+            return jwtService.generateToken(email, appUser.getRole());
         }
         else throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid Credentials");
     }

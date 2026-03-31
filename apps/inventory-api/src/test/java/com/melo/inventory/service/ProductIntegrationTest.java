@@ -1,9 +1,7 @@
 package com.melo.inventory.integration;
 
-import com.melo.inventory.model.AppUserResponse;
-import com.melo.inventory.model.AuthRequest;
-import com.melo.inventory.model.Product;
-import com.melo.inventory.model.ProductRequest;
+import com.melo.inventory.model.*;
+import com.melo.inventory.repository.AppUserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +9,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.web.server.ResponseStatusException;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -35,6 +34,8 @@ public class ProductIntegrationTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+    @Autowired
+    private AppUserRepository appUserRepository;
 
     @Test
     void shouldCreateProductWithAuth() {
@@ -45,6 +46,10 @@ public class ProductIntegrationTest {
                 restTemplate.postForEntity("/api/auth/register", registerRequest, AppUserResponse.class);
 
         assertEquals(HttpStatus.CREATED, registerResponse.getStatusCode());
+
+        AppUser appUser = appUserRepository.findByEmail("test@test.com").orElseThrow();
+        appUser.setRole("ADMIN");
+        appUserRepository.save(appUser);
 
         // login
         ResponseEntity<String> loginResponse =
