@@ -72,4 +72,56 @@ public class ProductIntegrationTest {
         assertEquals(HttpStatus.CREATED, productResponse.getStatusCode());
         assertEquals("Monitor", productResponse.getBody().getName());
     }
+
+    @Test
+    void shouldRejectProductCreationForUserRole(){
+        AuthRequest registerRequest = new AuthRequest("user@test.com", "123");
+
+        ResponseEntity<AppUserResponse> registerResponse =
+                restTemplate.postForEntity("/api/auth/register", registerRequest, AppUserResponse.class);
+
+        assertEquals(HttpStatus.CREATED, registerResponse.getStatusCode());
+
+        ResponseEntity<String> loginResponse =
+                restTemplate.postForEntity("/api/auth/login", new AuthRequest("user@test.com", "123"), String.class);
+        assertEquals(HttpStatus.OK, loginResponse.getStatusCode());
+        String token = loginResponse.getBody();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ProductRequest productRequest = new ProductRequest("Monitor", new BigDecimal("249.99"));
+        HttpEntity<ProductRequest> request = new HttpEntity<>(productRequest, headers);
+
+        ResponseEntity<Product> productResponse =
+                restTemplate.postForEntity("/api/products", request, Product.class);
+
+        assertEquals(HttpStatus.FORBIDDEN, productResponse.getStatusCode());
+    }
+
+    @Test
+    void shouldRejectDuplicateEmail(){
+        AuthRequest registerRequest = new AuthRequest("duplicate@test.com", "123");
+        ResponseEntity<AppUserResponse> registerResponse =
+                restTemplate.postForEntity("/api/auth/register", registerRequest, AppUserResponse.class);
+        assertEquals(HttpStatus.CREATED, registerResponse.getStatusCode());
+        ResponseEntity<AppUserResponse> registerResponse1 =
+                restTemplate.postForEntity("/api/auth/register", registerRequest, AppUserResponse.class);
+        assertEquals(HttpStatus.CONFLICT, registerResponse1.getStatusCode());
+    }
+
+    @Test
+    void shouldRejectLoginWithWrongPassword(){
+        AuthRequest registerRequest = new AuthRequest("password@test.com", "123");
+
+        ResponseEntity<AppUserResponse> registerResponse =
+                restTemplate.postForEntity("/api/auth/register", registerRequest, AppUserResponse.class);
+
+        assertEquals(HttpStatus.CREATED, registerResponse.getStatusCode());
+
+        ResponseEntity<String> loginResponse =
+                restTemplate.postForEntity("/api/auth/login", new AuthRequest("password@test.com", "123456"), String.class);
+        assertEquals(HttpStatus.UNAUTHORIZED, loginResponse.getStatusCode());
+    }
 }
