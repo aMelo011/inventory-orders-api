@@ -234,3 +234,7 @@
 - Always try to use Pagination
 - Unitary tests for CategoryServiceTest
 - Testcontainers v1.21.4 necessary for compatibility with Docker 29
+
+## 2026-03-31
+- Add colums with new versions via migration (V8)
+- Always register users with the role USER as default
