@@ -238,3 +238,8 @@
 ## 2026-03-31
 - Add colums with new versions via migration (V8)
 - Always register users with the role USER as default
+
+## 2026-04-01
+- Integration tests with containers user with role USER trying to create a product -> 403
+- duplicate emails should return 409
+- Login with the wrong password should return 401 
