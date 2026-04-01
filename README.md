@@ -22,6 +22,16 @@ A REST API for managing products, categories, and orders — built as a learning
 - Docker + docker-compose
 - Maven
 
+### Environment variables
+Copy the example file and fill in your values:
+```bash
+cp apps/inventory-api/.env.example apps/inventory-api/.env
+```
+Generate a JWT secret:
+```bash
+openssl rand -base64 32
+```
+
 ### Run the database
 
 ```bash
