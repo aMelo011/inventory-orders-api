@@ -38,7 +38,7 @@ public class OrderService {
         Order order = new Order();
         order.setCreatedAt(LocalDateTime.now());
         order.setUser(appUser);
-        order.setStatus("PENDING");
+        order.setStatus(OrderStatus.PENDING);
         orderRepository.save(order);
 
         List<OrderItemResponse> itemResponses = new ArrayList<>();
@@ -67,7 +67,7 @@ public class OrderService {
 
         OrderResponse orderResponse = new OrderResponse();
         orderResponse.setId(order.getId());
-        orderResponse.setStatus(order.getStatus());
+        orderResponse.setStatus(order.getStatus().name());
         orderResponse.setCreatedAt(order.getCreatedAt());
         orderResponse.setUser(appUserResponse);
         orderResponse.setItems(itemResponses);
@@ -102,7 +102,7 @@ public class OrderService {
 
                 OrderResponse orderResponse = new OrderResponse();
                 orderResponse.setId(order.getId());
-                orderResponse.setStatus(order.getStatus());
+                orderResponse.setStatus(order.getStatus().name());
                 orderResponse.setCreatedAt(order.getCreatedAt());
                 orderResponse.setUser(appUserResponse);
                 orderResponse.setItems(itemResponses);

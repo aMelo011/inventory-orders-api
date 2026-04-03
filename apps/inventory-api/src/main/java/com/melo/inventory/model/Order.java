@@ -14,19 +14,19 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private AppUser user;
-
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
     private LocalDateTime createdAt;
 
     public Order(){}
 
     public Long getId(){return id;}
     public AppUser getUser(){return user;}
-    public String getStatus(){return status;}
+    public OrderStatus getStatus(){return status;}
     public LocalDateTime getCreatedAt(){return createdAt;}
 
     public void setId(Long id){this.id = id;}
     public void setUser(AppUser user){this.user = user;}
-    public void setStatus(String status){this.status = status;}
+    public void setStatus(OrderStatus status){this.status = status;}
     public void setCreatedAt(LocalDateTime createdAt){this.createdAt = createdAt;}
 }

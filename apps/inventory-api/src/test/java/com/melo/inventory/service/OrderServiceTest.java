@@ -50,7 +50,7 @@ public class OrderServiceTest {
 
         Order order = new Order();
         order.setId(1L);
-        order.setStatus("PENDING");
+        order.setStatus(OrderStatus.PENDING);
 
         OrderItemRequest orderItemRequest = new OrderItemRequest(1L, 3);
         OrderRequest orderRequest = new OrderRequest();

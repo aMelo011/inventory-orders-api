@@ -2,6 +2,7 @@ package com.melo.inventory.security;
 
 import com.melo.inventory.model.AppUser;
 import com.melo.inventory.model.AppUserResponse;
+import com.melo.inventory.model.UserRole;
 import com.melo.inventory.repository.AppUserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,7 +33,7 @@ public class AuthService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already exists");
         }
 
-        appUser.setRole("USER");
+        appUser.setRole(UserRole.USER);
 
         AppUser savedUser = appUserRepository.save(appUser);
 
@@ -44,7 +45,7 @@ public class AuthService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Email not found"));
 
         if (passwordEncoder.matches(password, appUser.getPassword())){
-            return jwtService.generateToken(email, appUser.getRole());
+            return jwtService.generateToken(email, appUser.getRole().name());
         }
         else throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid Credentials");
     }

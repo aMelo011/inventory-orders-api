@@ -49,7 +49,7 @@ public class ProductIntegrationTest {
         assertEquals(HttpStatus.CREATED, registerResponse.getStatusCode());
 
         AppUser appUser = appUserRepository.findByEmail("test@test.com").orElseThrow();
-        appUser.setRole("ADMIN");
+        appUser.setRole(UserRole.ADMIN);
         appUserRepository.save(appUser);
 
         // login
